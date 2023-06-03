@@ -30,7 +30,6 @@
               <q-item-section avatar>
                 <q-icon name="list" />
               </q-item-section>
-
               <q-item-section>
                 Задачи
               </q-item-section>
@@ -40,7 +39,6 @@
                 <q-item-section avatar>
                   <q-icon name="help" />
                 </q-item-section>
-
                 <q-item-section>
                   Помощь
                 </q-item-section>
@@ -50,7 +48,6 @@
                 <q-item-section avatar>
                   <q-icon name="link" />
                 </q-item-section>
-
                 <q-item-section>
                   О нас
                 </q-item-section>
@@ -71,9 +68,11 @@
       </q-drawer>
 
     <q-page-container>
-      <keep-alive>
-        <router-view />
-      </keep-alive>
+      <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component"/>
+        </keep-alive>
+      </router-view>
     </q-page-container>
   </q-layout>
 </template>
