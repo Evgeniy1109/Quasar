@@ -1,7 +1,7 @@
 <template>
   <q-page class="bg-grey-4 column">
     <input @keyup.enter="addTask" class="todo_input" placeholder="Добавить задачу" v-model="newTask">
-    <button :disabled="!newTask" @click="addTask" class="todo_input_btn">Добавить задачу</button>
+    <button :disabled="!newTask" @click="addTask" class="todo_input_btn">Записать задачу</button>
 
 
 
@@ -20,6 +20,10 @@
             <q-item-section @click.stop="deleteTask(index)" v-if="task.done" side> <q-btn  flat round color="negative" icon="delete" /></q-item-section>
           </q-item>
       </q-list>
+      <div v-if="!tasks.length">
+            <div class="img_hidden_title">В вашем ежедневнике зедач нет</div>
+            <div class="img_hidden">&#128214;</div>
+      </div>
   </q-page>
 </template>
 
@@ -45,19 +49,18 @@ export default {
             message: 'Задача удалена!',
             color: 'primary',
           })
-        })
+      })
     },
     addTask() {
-      // if (this.newTask == 0) {
-      //   disabled
-      // }else
-      this.tasks.push({
-        title: this.newTask,
-        done: false,
-      });
-      this.newTask = ''
+      if (this.newTask.length > 0) {
+        this.tasks.push({
+          title: this.newTask,
+          done: false,
+        });
       }
+      this.newTask = ''
     }
+  }
   }
 
 </script>
@@ -80,7 +83,6 @@ export default {
   color: #fff;
   padding: 5px 10px;
   background-color: $primary;
-  margin-right: 20px;
 }
 .todo_input_btn{
   font-size: 26px;
@@ -90,6 +92,18 @@ export default {
   padding: 20px 0;
   cursor: pointer;
 }
-
+.img_hidden_title{
+  font-size: 26px;
+  text-align: center;
+  padding-top: 120px;
+  opacity: 0.2;
+}
+.img_hidden{
+  font-size: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.2;
+}
 
 </style>
